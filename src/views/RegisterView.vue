@@ -57,7 +57,6 @@
 
 <script setup>
 import { onBeforeMount, reactive, ref } from "vue";
-import { useRoute } from "vue-router";
 import { optionsPlans } from "./HostingPlans/optionsPlans";
 
 // components
@@ -66,7 +65,7 @@ import BaseCard from "@/common/components/BaseCard.vue";
 import BaseInput from "@/common/components/BaseInput.vue";
 import TheHostingPlan from "@/common/components/HostingPlans/TheHostingPlan.vue";
 
-const router = useRoute();
+// const router = useRoute();
 let selectedPlan = reactive({});
 
 onBeforeMount(() => {
