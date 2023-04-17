@@ -9,23 +9,29 @@
           Para acessar sua conta informe seu e-mail e senha
         </div>
 
-        <div class="item" :style="{ marginBottom: '16px' }">
-          <div class="login__form__label">E-mail</div>
-          <BaseInput v-model="formData.email" class="w-100" placeholder=" " />
-        </div>
-        <div class="item">
-          <div class="login__form__label">Senha</div>
-          <BaseInput v-model="formData.password" class="w-100" />
-          <div class="login__form__link">
-            <a href="#">Esqueci minha senha</a>
-          </div>
+        <BaseInput
+          v-model="formData.email"
+          class="w-100"
+          placeholder="Seu e-mail"
+          label="E-mail"
+          :style="{ marginBottom: '16px' }"
+        />
+
+        <BaseInput
+          v-model="formData.password"
+          label="Senha"
+          placeholder="Sua senha"
+          class="w-100"
+        />
+        <div class="login__form__link">
+          <a href="#">Esqueci minha senha</a>
         </div>
         <BaseButton label="FAZER LOGIN" @click="handleSubmit" />
       </template>
     </BaseCard>
     <div class="login__link">
       Ainda não tem conta?
-      <router-link to="/cadastrar-usuario">Cadastre-se</router-link>
+      <router-link to="/planos-de-hospedagem">Cadastre-se</router-link>
     </div>
   </div>
 </template>
@@ -34,9 +40,9 @@
 import { reactive } from "vue";
 
 // components
-import BaseInput from "@/common/components/BaseInput.vue";
-import BaseCard from "@/common/components/BaseCard.vue";
 import BaseButton from "@/common/components/BaseButton.vue";
+import BaseCard from "@/common/components/BaseCard.vue";
+import BaseInput from "@/common/components/BaseInput.vue";
 
 // services
 import { authLogin } from "@/services";
@@ -90,13 +96,6 @@ async function handleSubmit() {
       padding: 4px 0 20px;
     }
 
-    &__label {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 1rem;
-      line-height: 1.25rem;
-    }
-
     &__link {
       font-style: normal;
       font-weight: 400;
@@ -105,6 +104,13 @@ async function handleSubmit() {
       color: #515d74;
       text-align: right;
       padding: 4px 0 24px;
+    }
+  }
+
+  &__link {
+    a {
+      color: var(--red);
+      text-decoration: underline;
     }
   }
 
