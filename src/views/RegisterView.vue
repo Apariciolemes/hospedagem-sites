@@ -1,62 +1,118 @@
 <template>
   <div class="register-view">
+    <BaseHeaderNotAuth />
     <div class="container">
       <BaseCard>
         <template #content>
-          <form>
-            <div class="item" :style="{ marginBottom: '16px' }">
-              <div class="login__form__label">Nome completo</div>
-              <BaseInput
-                v-model="formData.name"
-                class="w-100"
-                placeholder="Informe seu nome completo"
-              />
+          <form class="register-view__form">
+            <div class="register-view__form__title">Dados pessoais</div>
+            <div class="register-view__form__subtitle">
+              Informe seus dados pessoais para acesso à sua conta
             </div>
-            <div class="item" :style="{ marginBottom: '16px' }">
-              <div class="login__form__label">Celular</div>
-              <BaseInput
-                v-model="formData.phone"
-                class="w-100"
-                type="number"
-                placeholder="(99) 99999-0000"
-              />
-            </div>
-            <div class="item" :style="{ marginBottom: '16px' }">
-              <div class="login__form__label">E-mail</div>
-              <BaseInput
-                v-model="formData.email"
-                class="w-100"
-                placeholder=" "
-              />
-            </div>
-            <div class="item" :style="{ marginBottom: '16px' }">
-              <div class="login__form__label">Senha</div>
-              <BaseInput
-                v-model="formData.password"
-                hint="No mínimo 8 caracteres"
-                class="w-100"
-                placeholder=" "
-              />
-            </div>
-            <div class="item" :style="{ marginBottom: '16px' }">
-              <div class="login__form__label">Confirme sua senha</div>
-              <BaseInput v-model="formData.confirmPassword" class="w-100" />
+
+            <BaseWrapperInput
+              :style="{ marginBottom: '16px' }"
+              label="Nome completo"
+            >
+              <template #input>
+                <BaseInput
+                  v-model="formData.name"
+                  class="w-100"
+                  placeholder="Informe seu nome completo"
+                />
+              </template>
+            </BaseWrapperInput>
+
+            <BaseWrapperInput label="Celular" :style="{ marginBottom: '16px' }">
+              <template #input>
+                <BaseInput
+                  v-model="formData.phone"
+                  type="number"
+                  class="w-100"
+                  placeholder="(99) 99999-0000"
+                />
+              </template>
+            </BaseWrapperInput>
+
+            <BaseWrapperInput label="E-mail" :style="{ marginBottom: '16px' }">
+              <template #input>
+                <BaseInput
+                  v-model="formData.email"
+                  class="w-100"
+                  placeholder="Informe seu e-mail"
+                />
+              </template>
+            </BaseWrapperInput>
+
+            <BaseWrapperInput
+              label="Senha"
+              hint="No mínimo 8 caracteres"
+              :style="{ marginBottom: '16px' }"
+            >
+              <template #input>
+                <BaseInput
+                  v-model="formData.password"
+                  type="password"
+                  class="w-100"
+                />
+              </template>
+            </BaseWrapperInput>
+
+            <BaseWrapperInput label="Confirme sua senha">
+              <template #input>
+                <BaseInput
+                  type="password"
+                  v-model="formData.confirmPassword"
+                  class="w-100"
+                />
+              </template>
+            </BaseWrapperInput>
+
+            <hr class="w-100" />
+
+            <div class="register-view__form__title">Dados do seu site</div>
+            <div class="register-view__form__subtitle" />
+
+            <BaseWrapperInput
+              label="Nome do seu site"
+              hint="Exatamente igual o título do seu site"
+            >
+              <template #input>
+                <BaseInput
+                  v-model="formData.site"
+                  class="w-100"
+                  placeholder="Meu site"
+                />
+              </template>
+            </BaseWrapperInput>
+
+            <hr />
+
+            <div class="register-view__form__checkbox">
+              <input type="checkbox" v-model="formData.acceptTerms" />
+              <div class="register-view__form__checkbox__label">
+                Ao concluir com seu cadastro você concorda com nossos
+                <span>termos de uso</span> e
+                <span>politicas de privacidade.</span>
+              </div>
             </div>
             <BaseButton
               @click="handleCreateUser"
-              class="w-100"
               label="CRIAR CONTA"
+              class="w-100"
+              :disabled="disabledButton"
             />
           </form>
         </template>
       </BaseCard>
-      <TheHostingPlan :plan="selectedPlan" />
+
+      <TheHostingPlan v-if="selectedPlan" :plan="selectedPlan" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onBeforeMount, reactive, ref } from "vue";
+import { onBeforeMount, reactive, computed } from "vue";
 import { optionsPlans } from "./HostingPlans/optionsPlans";
 
 // components
@@ -64,12 +120,24 @@ import BaseButton from "@/common/components/BaseButton.vue";
 import BaseCard from "@/common/components/BaseCard.vue";
 import BaseInput from "@/common/components/BaseInput.vue";
 import TheHostingPlan from "@/common/components/HostingPlans/TheHostingPlan.vue";
+import BaseHeaderNotAuth from "../common/components/BaseHeaderNotAuth.vue";
+import BaseWrapperInput from "../common/components/BaseWrapperInput.vue";
 
-// const router = useRoute();
+// services
+import { createUser } from "@/services";
+
+// router
+import { useRoute, useRouter } from "vue-router";
+const router = useRouter();
+const routes = useRoute();
+
+// lifecycles
+
 let selectedPlan = reactive({});
 
 onBeforeMount(() => {
-  const isPlan = optionsPlans.find((plan) => plan.id === 2);
+  const { id } = routes.params;
+  const isPlan = optionsPlans.find((plan) => plan.id == id);
   selectedPlan = isPlan;
 });
 
@@ -79,17 +147,38 @@ const initialFormData = () => ({
   email: undefined,
   password: undefined,
   confirmPassword: undefined,
+  site: undefined,
+  acceptTerms: false,
 });
 
-const formData = ref(initialFormData());
+const formData = reactive(initialFormData());
+
+const disabledButton = computed(() => {
+  return (
+    !formData.name ||
+    !formData.phone ||
+    !formData.email ||
+    !formData.password ||
+    !formData.confirmPassword ||
+    !formData.site ||
+    !formData.acceptTerms
+  );
+});
 
 async function handleCreateUser() {
-  console.log("create user");
+  try {
+    await createUser(formData);
+    router.push("/");
+
+    handleResetFormData();
+  } catch (error) {
+    console.log("Erro ao criar usuário", error);
+  }
 }
 
-// function handleResetFormData() {
-//   Object.assign(formData, initialFormData())
-// }
+function handleResetFormData() {
+  Object.assign(formData, initialFormData());
+}
 </script>
 
 <style lang="scss">
@@ -98,6 +187,49 @@ async function handleCreateUser() {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
+  }
+
+  &__form {
+    &__title {
+      font-weight: 700;
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+      color: var(--dark);
+    }
+
+    &__subtitle {
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+      margin: 4px 0 20px;
+      color: var(--dark);
+    }
+
+    &__checkbox {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+
+      input {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+      }
+
+      &__label {
+        font-family: "Sora";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.25rem;
+
+        color: var(--dark);
+
+        span {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }
 </style>

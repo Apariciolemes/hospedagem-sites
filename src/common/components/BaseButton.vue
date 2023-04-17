@@ -1,5 +1,11 @@
 <template>
-  <button type="button" :style="style" class="base-button">
+  <button
+    type="button"
+    :style="style"
+    class="base-button"
+    :class="props.disabled && 'disabled'"
+    :disabled="props.disabled"
+  >
     {{ props.label }}
   </button>
 </template>
@@ -11,6 +17,10 @@ const props = defineProps({
   label: String,
   size: String,
   color: String,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const style = {
@@ -19,7 +29,7 @@ const style = {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .base-button {
   background-color: var(--red);
   border-radius: 5px;
@@ -35,5 +45,12 @@ const style = {
   &:focus {
     background-color: var(--red);
   }
+}
+
+.disabled {
+  background: #dadce0;
+  color: #00000054;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 </style>

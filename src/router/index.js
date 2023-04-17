@@ -10,7 +10,7 @@ const router = createRouter({
       component: () => import("@/views/HomeView.vue"),
     },
     {
-      path: "/cadastrar-usuario",
+      path: "/cadastrar-usuario/:id",
       name: "Cadastrar Usuário",
       component: () => import("@/views/RegisterView.vue"),
     },

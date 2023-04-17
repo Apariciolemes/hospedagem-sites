@@ -2,20 +2,13 @@
   <div class="hosting-plans-view">
     <div class="container">
       <div class="hosting-plans-view--wrapper">
-        <img
-          class="hosting-plans-view__image"
-          src="@/common/assets/logo.png"
-          alt="logo"
-        />
-        <div class="hosting-plans-view__label">
-          Você está muito próximo de mudar a forma de hospedar seu site
-        </div>
+        <BaseHeaderNotAuth />
 
         <div class="hosting-plans-view__plans">
           <div v-for="(plan, index) in optionsPlans" :key="`${plan}-${index}`">
             <TheHostingPlan
               :plan="plan"
-              @emit-select-plan="handleSelectedPlan"
+              @emit-selected-plan="handleSelectedPlan"
             />
           </div>
         </div>
@@ -28,8 +21,13 @@
 import TheHostingPlan from "@/common/components/HostingPlans/TheHostingPlan.vue";
 import { optionsPlans } from "./optionsPlans";
 
-function handleSelectedPlan() {
-  console.log("handleSelectedPlan");
+// routes
+import { useRouter } from "vue-router";
+import BaseHeaderNotAuth from "../../common/components/BaseHeaderNotAuth.vue";
+const router = useRouter();
+
+function handleSelectedPlan(id) {
+  router.push(`/cadastrar-usuario/${id}`);
 }
 </script>
 

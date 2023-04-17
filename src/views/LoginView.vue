@@ -8,7 +8,6 @@
         <div class="login__form__subtitle">
           Para acessar sua conta informe seu e-mail e senha
         </div>
-
         <BaseInput
           v-model="formData.email"
           class="w-100"
@@ -20,13 +19,18 @@
         <BaseInput
           v-model="formData.password"
           label="Senha"
+          type="password"
           placeholder="Sua senha"
           class="w-100"
         />
         <div class="login__form__link">
           <a href="#">Esqueci minha senha</a>
         </div>
-        <BaseButton label="FAZER LOGIN" @click="handleSubmit" />
+        <BaseButton
+          label="FAZER LOGIN"
+          @click="handleSubmit"
+          :disabled="disabledButton"
+        />
       </template>
     </BaseCard>
     <div class="login__link">
@@ -37,7 +41,11 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+
+// router
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 // components
 import BaseButton from "@/common/components/BaseButton.vue";
@@ -48,21 +56,40 @@ import BaseInput from "@/common/components/BaseInput.vue";
 import { authLogin } from "@/services";
 
 const initialFormData = () => ({
-  email: undefined,
-  password: undefined,
+  email: "",
+  password: "",
 });
 
 const formData = reactive(initialFormData());
+
+const disabledButton = computed(() => {
+  return !formData.email || !formData.password;
+});
+
+function resetFormData() {
+  Object.assign(formData, initialFormData());
+}
 
 async function handleSubmit() {
   const { email, password } = formData;
 
   if (!email || !password) return;
 
-  await authLogin({
-    username: "mor_2314",
-    password: "83r5^_",
-  });
+  try {
+    const response = await authLogin({
+      username: "mor_2314",
+      password: "83r5^_",
+    });
+
+    const token = response.data.token;
+    localStorage.setItem("token", token);
+
+    resetFormData();
+
+    router.push("/");
+  } catch (e) {
+    console.log("Erro ao tentar fazer login ->", e);
+  }
 }
 </script>
 
@@ -116,6 +143,7 @@ async function handleSubmit() {
 
   img {
     width: 178px;
+    margin-bottom: 32px;
   }
 }
 </style>

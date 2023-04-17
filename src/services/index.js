@@ -1,5 +1,9 @@
-import axios from './config'
+import http from "./config";
 
 export async function authLogin(payload) {
-  return axios.post('auth/login', payload)
+  return http.post("auth/login", payload);
+}
+
+export async function createUser(payload) {
+  return http.post("users", payload);
 }

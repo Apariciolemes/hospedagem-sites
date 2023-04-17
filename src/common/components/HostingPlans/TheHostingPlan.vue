@@ -1,29 +1,63 @@
 <template>
   <div class="card-hosting-plans">
-    <div class="card-hosting-plans__type">
-      {{ props.plan.type }}
+    <div class="text-center">
+      <div class="card-hosting-plans__type">
+        {{ props.plan.type }}
+      </div>
+      <div class="card-hosting-plans__price">
+        {{ customPrice }}
+      </div>
+
+      <div
+        class="card-hosting-plans__tax-description"
+        v-html="props.plan.taxDescription"
+      />
+
+      <hr />
+
+      <div class="card-hosting-plans__ideal">
+        {{ props.plan.idealForDescription }}
+      </div>
+      <hr />
+
+      <BaseButton
+        label="ESCOLHER ESSE PLANO"
+        class="w-100"
+        @click="$emit('emit-selected-plan', props.plan.id)"
+      />
     </div>
-    <div class="card-hosting-plans__price">
-      {{ customPrice }}
-    </div>
 
-    <div
-      class="card-hosting-plans__tax-description"
-      v-html="props.plan.taxDescription"
-    />
-
-    <hr />
-
-    <div class="card-hosting-plans__ideal">
-      {{ props.plan.idealForDescription }}
-    </div>
-    <hr />
-
-    <div class="card-hosting-plans__region">
+    <div class="card-hosting-plans__list-options">
       Seu site em servidores no Estados Unidos.
+
+      <div
+        class="card-hosting-plans__list-options__items"
+        v-for="option in props.plan.optionsServer"
+        :key="option"
+      >
+        <div class="card-hosting-plans__list-options___item">
+          <i class="fa fa-check"></i>
+          {{ option }}
+        </div>
+      </div>
     </div>
 
-    <BaseButton label="ESCOLHER ESSE PLANO" />
+    <div class="card-hosting-plans__list-options">
+      Suporte 24 horas, 7 dias por semana grátis;
+      <br />
+      Aplicativos disponíveis;
+
+      <div
+        v-for="option in props.plan.optionsServer"
+        :key="option"
+        class="card-hosting-plans__list-options__items"
+      >
+        <div class="card-hosting-plans__list-options___item">
+          <i class="fa fa-check"></i>
+          {{ option }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,6 +72,7 @@ import BaseButton from "../BaseButton.vue";
 
 /* 
   props: {
+    id: Number,
     type: String,
     price: Number,
     taxDescription: String,
@@ -56,7 +91,7 @@ const props = defineProps({
 const customPrice = computed(() => {
   return props.plan.price === 0
     ? "Grátis"
-    : useFormatCurrency(props.plan.price);
+    : useFormatCurrency(Number(props.plan.price));
 });
 </script>
 
@@ -65,38 +100,45 @@ const customPrice = computed(() => {
   padding: 40px;
   background: var(--white);
   display: flex;
-  text-align: center;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
 
   &__type {
     color: #666666;
     font-weight: 700;
-    font-size: 26px;
-    line-height: 33px;
+    font-size: 1.625rem;
+    line-height: 2.125rem;
+  }
+
+  &__price {
+    padding: 24px 0 16px;
   }
 
   &__price {
     font-weight: 700;
-    font-size: 34px;
-    line-height: 43px;
-    color: #f30168;
+    font-size: 2.125rem;
+    line-height: 2.75rem;
+    color: var(--red);
   }
 
   &__tax-description {
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
 
     color: #666666;
   }
 
-  hr {
-    border: 1px solid rgba(196, 196, 196, 0.5);
-    margin: 16px 0;
-  }
+  &__list-options {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.375rem;
+    color: #666666;
+    padding: 24px 0 20px;
 
-  &__ideal {
+    &__items {
+      padding-top: 10px;
+      font-weight: 400;
+    }
   }
 }
 </style>
