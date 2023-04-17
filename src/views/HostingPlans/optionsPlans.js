@@ -1,0 +1,71 @@
+const defaultOptionsAvailableApps = [
+  "Wordpress;",
+  "Drupal;",
+  "entre outros...",
+];
+const defaultOtherOptions = [
+  "Webmail RoundCube;",
+  "AntiSpam;",
+  "Painel de gerenciamento de DNS;",
+  "Painel de controle web;",
+  "Configurações de PHP personalizáveis;",
+  "Certificado SSL Grátis;",
+  "Transferência ilimitada.",
+];
+
+export const optionsPlans = [
+  {
+    id: 1,
+    type: "Hospedagem 1",
+    price: 0,
+    taxDescription: "você não paga nada para usar <br /> sem taxa de setup",
+    idealForDescription: "Ideal para quem está começando.",
+    optionsServer: [
+      "Servidores em nossos data center americanos",
+      "ASP, ASP.NET 2.0/3.0/3.5/ e 4.0/4.5/4.5.1/4.5.2 (medium trust) ou PHP 5.3, 5.4, 5.5, 5.6 e 7.0;",
+      "1 usuário de FTP para upload ou download;",
+      "1 usuário de FTP para upload ou download;",
+      "1 contas de e-mails profissionais;",
+      "1 subdomínio gratuito;",
+    ],
+    optionsAvailableApps: defaultOptionsAvailableApps,
+    migrationFree: false,
+    OtherOptions: defaultOtherOptions,
+  },
+  {
+    id: 2,
+    type: "Hospedagem 2",
+    price: 499,
+    taxDescription: "você não paga nada para usar <br /> sem taxa de setup",
+    idealForDescription: "Ideal para quem está começando.",
+    optionsServer: [
+      "Servidores em nossos data center americanos",
+      "ASP, ASP.NET 2.0/3.0/3.5/ e 4.0/4.5/4.5.1/4.5.2 (medium trust) ou PHP 5.3, 5.4, 5.5, 5.6 e 7.0;",
+      "1 usuário de FTP para upload ou download;",
+      "1 usuário de FTP para upload ou download;",
+      "1 contas de e-mails profissionais;",
+      "1 subdomínio gratuito;",
+    ],
+    optionsAvailableApps: defaultOptionsAvailableApps,
+    migrationFree: false,
+    OtherOptions: defaultOtherOptions,
+  },
+  {
+    id: 3,
+    type: "Hospedagem 3",
+    price: 999,
+    taxDescription: "você não paga nada para usar <br /> sem taxa de setup",
+    idealForDescription: "Ideal para quem está começando.",
+    optionsServer: [
+      "Servidores em nossos data center americanos",
+      "ASP, ASP.NET 2.0/3.0/3.5/ e 4.0/4.5/4.5.1/4.5.2 (medium trust) ou PHP 5.3, 5.4, 5.5, 5.6 e 7.0;",
+      "1 usuário de FTP para upload ou download;",
+      "1 usuário de FTP para upload ou download;",
+      "1 contas de e-mails profissionais;",
+      "1 subdomínio gratuito;",
+    ],
+    optionsAvailableApps: defaultOptionsAvailableApps,
+    migrationFree: false,
+    OtherOptions: defaultOtherOptions,
+  },
+];

@@ -6,19 +6,41 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("@/views/Login.vue"),
+      meta: { requiresAuth: true },
+      component: () => import("@/views/HomeView.vue"),
     },
     {
       path: "/cadastrar-usuario",
       name: "Cadastrar Usuário",
-      component: () => import("@/views/Register.vue"),
+      component: () => import("@/views/RegisterView.vue"),
     },
     {
       path: "/login",
       name: "Login",
-      component: () => import("@/views/Login.vue"),
+      component: () => import("@/views/LoginView.vue"),
+    },
+    {
+      path: "/planos-de-hospedagem",
+      name: "Planos de Hospedagem",
+      component: () => import("@/views/HostingPlans/HostingPlansView.vue"),
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      next({
+        path: "/login",
+        query: { redirect: to.fullPath }, // Armazena a rota que o usuário tentou acessar
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
