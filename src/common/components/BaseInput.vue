@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 import { defineProps } from "vue";
 
@@ -28,10 +28,6 @@ const props = defineProps({
   label: String,
   hint: String,
   placeholder: String,
-});
-
-onMounted(() => {
-  console.log("BaseInput");
 });
 
 const vModel = ref(undefined);

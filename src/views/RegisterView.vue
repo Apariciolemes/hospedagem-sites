@@ -70,13 +70,8 @@ const router = useRoute();
 let selectedPlan = reactive({});
 
 onBeforeMount(() => {
-  console.log("montou");
   const isPlan = optionsPlans.find((plan) => plan.id === 2);
   selectedPlan = isPlan;
-
-  console.log("selectedPlan", selectedPlan);
-
-  console.log("router", router);
 });
 
 const initialFormData = () => ({
