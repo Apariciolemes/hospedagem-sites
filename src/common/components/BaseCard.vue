@@ -6,7 +6,7 @@
 
 <style lang="scss">
 .base-card {
-  background: #ffffff;
+  background: var(--white);
   border: 1px solid #e6eaf2;
   border-radius: 5px;
   padding: 28px 32px 32px;
