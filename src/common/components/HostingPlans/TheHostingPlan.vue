@@ -4,7 +4,7 @@
       <div class="card-hosting-plans__type">
         {{ props.plan.type }}
       </div>
-      <div class="card-hosting-plans__price">
+      <div class="card-hosting-plans__price" style="white-space: pre">
         {{ customPrice }}
       </div>
 
@@ -21,13 +21,14 @@
       <hr />
 
       <BaseButton
+        v-if="showButton"
         label="ESCOLHER ESSE PLANO"
         class="w-100"
         @click="$emit('emit-selected-plan', props.plan.id)"
       />
     </div>
 
-    <div class="card-hosting-plans__list-options">
+    <div class="card-hosting-plans__list-options hide-on-small">
       Seu site em servidores no Estados Unidos.
 
       <div
@@ -42,7 +43,7 @@
       </div>
     </div>
 
-    <div class="card-hosting-plans__list-options">
+    <div class="card-hosting-plans__list-options hide-on-small">
       Suporte 24 horas, 7 dias por semana grátis;
       <br />
       Aplicativos disponíveis;
@@ -86,12 +87,12 @@ import BaseButton from "../BaseButton.vue";
 
 const props = defineProps({
   plan: Object,
+  showButton: Boolean,
 });
 
 const customPrice = computed(() => {
-  return props.plan.price === 0
-    ? "Grátis"
-    : useFormatCurrency(Number(props.plan.price));
+  const currency = useFormatCurrency(Number(props.plan.price));
+  return props.plan.price === 0 ? "Grátis" : String(currency.value).trim();
 });
 </script>
 

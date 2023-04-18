@@ -2,7 +2,7 @@
   <div class="register-view">
     <BaseHeaderNotAuth />
     <div class="container">
-      <BaseCard>
+      <BaseCard class="order-1">
         <template #content>
           <form class="register-view__form">
             <div class="register-view__form__title">Dados pessoais</div>
@@ -106,13 +106,17 @@
         </template>
       </BaseCard>
 
-      <TheHostingPlan v-if="selectedPlan" :plan="selectedPlan" />
+      <TheHostingPlan
+        v-if="selectedPlan"
+        :plan="selectedPlan"
+        class="order-2"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onBeforeMount, reactive, computed } from "vue";
+import { computed, onBeforeMount, reactive } from "vue";
 import { optionsPlans } from "./HostingPlans/optionsPlans";
 
 // components
@@ -187,6 +191,22 @@ function handleResetFormData() {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
+
+    @media screen and (max-width: 768px) {
+      grid-template-areas:
+        "order-2"
+        "order-1";
+      grid-template-columns: 1fr;
+      padding: 0 16px;
+    }
+
+    .order-1 {
+      grid-area: order-1;
+    }
+
+    .order-2 {
+      grid-area: order-2;
+    }
   }
 
   &__form {
