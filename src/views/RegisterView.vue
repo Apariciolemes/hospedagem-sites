@@ -199,12 +199,12 @@ function handleResetFormData() {
       grid-template-columns: 1fr;
       padding: 0 16px;
 
-      .order-1 {
-        grid-area: order-1;
-      }
-
       .order-2 {
         grid-area: order-2;
+      }
+
+      .order-1 {
+        grid-area: order-1;
       }
     }
   }
