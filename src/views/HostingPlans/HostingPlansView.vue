@@ -7,6 +7,7 @@
         <div class="hosting-plans-view__plans">
           <div v-for="(plan, index) in optionsPlans" :key="`${plan}-${index}`">
             <TheHostingPlan
+              :showButton="true"
               :plan="plan"
               @emit-selected-plan="handleSelectedPlan"
             />
@@ -44,6 +45,10 @@ function handleSelectedPlan(id) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: auto;
+    }
   }
 }
 </style>

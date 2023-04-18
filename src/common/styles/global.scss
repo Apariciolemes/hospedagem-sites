@@ -74,3 +74,24 @@ input {
   width: 100%;
   max-width: 1200px;
 }
+
+/* Ocultar um elemento em telas menores que 768px de largura */
+@media (max-width: 767.98px) {
+  .hide-on-small {
+    display: none;
+  }
+}
+
+/* Ocultar um elemento em telas maiores que 768px de largura */
+@media (min-width: 768px) {
+  .hide-on-large {
+    display: none;
+  }
+}
+
+/* Ocultar um elemento em telas com largura entre 768px e 1024px */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .hide-on-medium {
+    display: none;
+  }
+}

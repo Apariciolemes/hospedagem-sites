@@ -33,6 +33,10 @@ import BaseHeader from "@/common/components/BaseHeader.vue";
     display: flex;
     justify-content: center;
     flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+      padding: 0 16px;
+    }
   }
 
   &__name {
