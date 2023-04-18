@@ -1,4 +1,4 @@
-# Nome do Projeto
+# Hospedagem de Sites (DEMO)
 
 Projeto de hospedagem de sites com opções de planos, este projeto contém tela de login e cadastro, além de uma home na área autenticada para visualização de um vídeo de acordo com o plano, no caso um vídeo institucional.
 
