@@ -1,35 +1,37 @@
-# Hospedagem de Sites (DEMO)
+# Website Hosting (DEMO)
 
-Projeto de hospedagem de sites com opções de planos, este projeto contém tela de login e cadastro, além de uma home na área autenticada para visualização de um vídeo de acordo com o plano, no caso um vídeo institucional.
+A website hosting project with plan options, this project includes a login and registration screen, as well as a home page in the authenticated area for viewing a video according to the plan, in this case an institutional video.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- Vue.js 3 com Composition API
+- Vue.js 3 with Composition API
 - SASS
-- Axios para consumo de APIs
-- FAKE STORE API para simulação de API
-- Netlify para deploy
-- FontAwesome para ícones
+- Axios for API consumption
+- FAKE STORE API for API simulation
+- Netlify for deployment
+- FontAwesome for icons
 - Google Fonts
 
-## Instalação
+## Installation
 
-1. Clone o repositório: `git clone https://github.com/Apariciolemes/hospedagem-sites.git`
-2. Instale as dependências: `npm install`
+1. Clone the repository: git clone https://github.com/Apariciolemes/hospedagem-sites.git
+2. Install dependencies: npm install
 
 ## Uso
 
-1. Execute o servidor local: `npm run serve`
-2. Acesse o endereço: `http://localhost:8080`
+1. Run the local server: `npm run dev`
+2. Access the address: `http://localhost:8080`
 
 ## Deployment
 
-1. Faça o build do projeto: `npm run build`
-2. Faça o deploy para o Netlify
+1. Build the project: `npm run build`
+2. Deploy to Netlify
 
-## Exemplo
+## .env
+VUE_APP_BASE_URL=https://fakestoreapi.com/
+## Example
 
-Você pode visualizar o projeto em funcionamento no link abaixo:
+You can view the project in action at the link below:
 
 `https://master--localchallange.netlify.app/`
 
