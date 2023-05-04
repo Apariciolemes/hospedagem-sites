@@ -2,11 +2,11 @@
   <div class="hosting-plans-view">
     <div class="container">
       <div class="hosting-plans-view--wrapper">
-        <BaseHeaderNotAuth />
+        <TheHeaderNotAuth />
 
         <div class="hosting-plans-view__plans">
           <div v-for="(plan, index) in optionsPlans" :key="`${plan}-${index}`">
-            <TheHostingPlan
+            <HostingPlansOption
               :showButton="true"
               :plan="plan"
               @emit-selected-plan="handleSelectedPlan"
@@ -19,12 +19,15 @@
 </template>
 
 <script setup>
-import TheHostingPlan from "@/common/components/HostingPlans/TheHostingPlan.vue";
+// components
+import HostingPlansOption from "@/components/HostingPlansOption.vue";
+import TheHeaderNotAuth from "@/components/TheHeaderNotAuth.vue";
+
+// data
 import { optionsPlans } from "./optionsPlans";
 
 // routes
 import { useRouter } from "vue-router";
-import BaseHeaderNotAuth from "../../common/components/BaseHeaderNotAuth.vue";
 const router = useRouter();
 
 function handleSelectedPlan(id) {

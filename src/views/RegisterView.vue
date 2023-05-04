@@ -1,6 +1,6 @@
 <template>
   <div class="register-view">
-    <BaseHeaderNotAuth />
+    <TheHeaderNotAuth />
     <div class="container">
       <BaseCard class="order-1">
         <template #content>
@@ -106,7 +106,7 @@
         </template>
       </BaseCard>
 
-      <TheHostingPlan
+      <HostingPlansOption
         v-if="selectedPlan"
         :plan="selectedPlan"
         class="order-2"
@@ -120,12 +120,12 @@ import { computed, onBeforeMount, reactive } from "vue";
 import { optionsPlans } from "./HostingPlans/optionsPlans";
 
 // components
-import BaseButton from "@/common/components/BaseButton.vue";
-import BaseCard from "@/common/components/BaseCard.vue";
-import BaseInput from "@/common/components/BaseInput.vue";
-import TheHostingPlan from "@/common/components/HostingPlans/TheHostingPlan.vue";
-import BaseHeaderNotAuth from "../common/components/BaseHeaderNotAuth.vue";
-import BaseWrapperInput from "../common/components/BaseWrapperInput.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import BaseCard from "@/components/BaseCard.vue";
+import BaseInput from "@/components/BaseInput.vue";
+import BaseWrapperInput from "@/components/BaseWrapperInput.vue";
+import HostingPlansOption from "@/components/HostingPlansOption.vue";
+import TheHeaderNotAuth from "@/components/TheHeaderNotAuth.vue";
 
 // services
 import { createUser } from "@/services";

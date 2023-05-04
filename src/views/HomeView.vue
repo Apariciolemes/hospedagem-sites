@@ -1,6 +1,6 @@
 <template>
   <div class="home-view">
-    <BaseHeader />
+    <TheHeader />
     <div class="container">
       <div class="home-view__name">Olá João,</div>
       <div class="home-view__description">
@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import BaseHeader from "@/common/components/BaseHeader.vue";
+import TheHeader from "@/components/TheHeader.vue";
 </script>
 
 <style lang="scss">

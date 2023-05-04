@@ -41,16 +41,16 @@
 </template>
 
 <script setup>
-import { reactive, computed } from "vue";
+import { computed, reactive } from "vue";
 
 // router
 import { useRouter } from "vue-router";
 const router = useRouter();
 
 // components
-import BaseButton from "@/common/components/BaseButton.vue";
-import BaseCard from "@/common/components/BaseCard.vue";
-import BaseInput from "@/common/components/BaseInput.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import BaseCard from "@/components/BaseCard.vue";
+import BaseInput from "@/components/BaseInput.vue";
 
 // services
 import { authLogin } from "@/services";
